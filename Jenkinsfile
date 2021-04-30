@@ -4,7 +4,7 @@ pipeline {
                          stage('cleanup workspace') {
 
                                              steps {
-                                                     echo $WORKSPACE
+                                                     echo ${WORKSPACE}
                                              }
 
                          }
