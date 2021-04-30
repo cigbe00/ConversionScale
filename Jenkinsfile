@@ -4,8 +4,6 @@ pipeline {
                          stage('cleanup workspace') {
 
                                              steps {
-                                                     echo 'performing workspace cleanup'
-                                                     pwd
                                                      echo $WORKSPACE
                                              }
 
