@@ -5,6 +5,7 @@ pipeline {
 
                                              steps {
                                                      echo "${WORKSPACE}"
+                                                     echo "cleaning.."
                                              }
 
                          }
