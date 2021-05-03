@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    options {
+        // This is required if you want to clean before build
+        skipDefaultCheckout(true)
+    }
     parameters {
         string (
             defaultValue: '*',
@@ -13,7 +17,9 @@ pipeline {
 
     stages {
          stage ('Clean up') {
-             step([$class: 'WsCleanup'])           
+             steps {
+                 cleanWs()
+             }
          }
         stage ('Check') {
             steps {
@@ -61,6 +67,17 @@ pipeline {
                    }
 
        }
+    }
+    post {
+        // Clean after build
+        always {
+            cleanWs(cleanWhenNotBuilt: false,
+                    deleteDirs: true,
+                    disableDeferredWipeout: true,
+                    notFailBuild: true,
+                    patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
+                               [pattern: '.propsfile', type: 'EXCLUDE']])
+        }
     }
 } 
        
